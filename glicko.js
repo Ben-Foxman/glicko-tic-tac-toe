@@ -46,22 +46,34 @@ function updateRating(player, opponents){
             player.RD = 30
         }
 }
-//function to increase RD as time increments pass
+//function to increase RD as time increments pass- if player is inactive, rating is less accurate
 function RDincrease(player){
     player.RD =  Math.min(350, Math.sqrt((player.RD * player.RD) + 63.2 * 63.2))
 }
+
+//expected outcome of a game between two players
+//0 = player never wins, 1 = player always wins
+function expectedOutcome(player, opponent){
+    let result = -g(Math.sqrt((player.RD * player.RD) + (opponent.RD * opponent.RD))) * (player.R - opponent.R)/400;
+    result = Math.pow(10, result) + 1;
+    return 1 / result
+}
+
+
+
+//TESTING
 let player = {
-    R: 1500,
-    RD: 200
+    R: 1400,
+    RD: 80
 };
 let opp1 = {
-    R: 1400,
-    RD: 30,
+    R: 2400,
+    RD: 300,
     outcome: 1
 };
 let opp2 = {
-    R: 1550,
-    RD: 100,
+    R: 1500,
+    RD: 150,
     outcome: 0
 };
 let opp3 = {
@@ -75,5 +87,9 @@ opponents.push(opp1);
 opponents.push(opp2);
 opponents.push(opp3);
 console.log(player.R, player.RD);
-updateRating(player,opponents);
-console.log(Math.round(player.R), (player.RD));
+console.log(expectedOutcome(player, opp2));
+for(let x = 0; x < 50; x++) {
+    updateRating(player, opponents);
+    console.log(Math.round(player.R), (player.RD));
+}
+console.log(expectedOutcome(player, opp2));
