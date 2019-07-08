@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src = "Users.js"> </script>
+<script src = "glicko.js"> </script>
+<script src = "Verify.js"> </script>
+
+<form method="post" id="loginForm">
+    <div class="Container">
+        <h1>Register</h1>
+        <p>Please login below.</p>
+        <hr>
+        <label for="username"><b>Username</b></label>
+        <label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+        </label>
+
+        <label for="psw"><b>Password</b></label>
+        <label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+        </label>
+        <hr>
+        <button id = "login" type="button" onclick="onLogin()" class="registerbtn">Login</button>
+
+    </div>
+</form>
+</body>
+</html>
